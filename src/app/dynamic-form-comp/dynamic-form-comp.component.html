@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+      <h3 class="text-primary bg-warning">Dynamic Form Field Example </h3>
+      <form [formGroup]="userForm" (ngSubmit)="send(userForm.value)">
+          <label >Name </label>
+          <br>  
+          <input type="text" formControlName="name" class="form-control">
+          <br>
+          <br>  
+          <div *ngFor="let phone of getPhonesFormControls(); let i = index" class="row">
+              <label>Phone {{i}} </label>    
+              <input [formControl]="phone" type="text" class="form-control col-md-6">
+              <button (click)="removePhone(i)" class="btn btn-primary col-md-3">Remove Phone</button> 
+              <br>   
+          </div>
+          <br>  
+            <button (click)="addPhone()" class="btn btn-secondary">Add new phone</button>
+          <br>
+          <br>  
+            <input type="submit" class="btn btn-warning">
+        </form>
+          <br>  
+        
+        {{userForm.value | json}}
+  </div>
+  <div class="col-md-3"></div>
+</div>

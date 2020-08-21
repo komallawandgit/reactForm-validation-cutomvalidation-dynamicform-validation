@@ -1,0 +1,198 @@
+<!-- main app container -->
+<div class="card m-3">
+  <h5 class="card-header">Angular Reactive Form Validation</h5>
+  <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-row">
+              <div class="form-group col-4">
+                  <label>Title</label>
+                  <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                      <option value=""></option>
+                      <option value="Mr">Mr</option>
+                      <option value="Mrs">Mrs</option>
+                      <option value="Miss">Miss</option>
+                      <option value="Ms">Ms</option>
+                  </select>
+                  <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                      <div *ngIf="f.title.errors.required">Title is required</div>
+                  </div>
+              </div>
+              <div class="form-group col-4">
+                  <label>First Name</label>
+                  <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                  <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                      <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                      <div *ngIf="f.firstName.errors.validateFirstname">firstname not allowes special char and number</div>
+                  </div>
+              </div>
+              <div class="form-group col-4">
+                  <label>Last Name</label>
+                  <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                      <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                      <div *ngIf="f.firstName.errors.validateFirstname">Last name not allowes special char and number</div>
+
+                  </div>`
+              </div>
+         </div>
+
+      <div class="form-row">
+          <div class="form-group col-4">
+            <label>Address 1</label>
+            <input type="text" formControlName="address1" [(ngModel)] ="address_1" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address1.errors }" />
+            <div *ngIf="submitted && f.address1.errors" class="invalid-feedback">
+                <div *ngIf="f.address1.errors.required">address1 is required</div>
+            </div>
+        </div>
+        <div class="form-group col-4">
+            <label>Address 2</label>
+            <input type="text" formControlName="address2"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
+            <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+                <div *ngIf="f.address2.errors.required">address2 is required</div>
+                <div *ngIf="'mismatchaddvalidator'||!f.address2.errors.required">same word can not be exist in address 1</div>
+            </div>
+        </div>
+        <div class="form-group col-4">
+              <label>Email</label>
+              <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email is required</div>
+                  <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+              </div>
+          </div>
+      </div>
+
+      <div class="form-row">
+              <div class="form-group col-4">
+                  <label>Password</label>
+                  <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password is required...,</div>
+                      <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                     <div *ngIf="f.password.errors.uppercaseValidatorValidator">Password is UPPERCASE required...,</div>
+                      <div *ngIf="f.password.errors.lowerCaseValidator">Password is lowerCaseValidator required...,</div>
+                      <div *ngIf="f.password.errors.numberValidator">Password is numberValidator required...,</div>
+                      <div *ngIf="f.password.errors.specialValidator">Password is specialValidator required...,</div>
+                    </div> 
+                </div>
+                 
+              <div class="form-group col-4">
+                  <label>Confirm Password</label>
+                  <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                  <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                      <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                      <div *ngIf="'mismatch'">Password Confirmation must match password</div>
+                  </div>
+              </div>
+              <div class="form-group col-4">
+                <label>Age</label>
+                  <input type="text" formControlName="age" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }" />
+                  <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                  <div *ngIf="f.age.errors.required">age  is required</div>  
+                    <div *ngIf="f.age.errors.ageValidator"> Only for age group 20 to 70</div> 
+                  </div> 
+            </div>
+          </div>
+        <div class="row">
+            <div class="form-group col-4">
+              <label>Mobile No</label>
+              <input type="text" formControlName="mobNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobNo.errors }" />
+             <div *ngIf="submitted && f.mobNo.errors" class="invalid-feedback">
+                <div *ngIf="f.mobNo.errors.required">MobNo  is required</div>  
+                <div *ngIf="f.mobNo.errors.validateMobileNo && !f.mobNo.errors.required"> MobNo only  number no more than 10</div> 
+              </div> 
+          </div>
+    
+          <div class="col-md-4">
+            <label> married  Validation compulsory</label>
+            <input type="checkbox" formControlName="myCheckbox" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.myCheckbox.errors }" />
+          </div>
+          <div class="col-md-4" >
+            <label>MARRIED YES/No</label>
+              <input type="text" formControlName="married" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.married.errors }" />
+              <div *ngIf="submitted && f.married.errors" class="invalid-feedback">
+              <div *ngIf="f.married.errors.required">married  is required</div> 
+            </div>
+          </div>
+          </div>
+      <div class="row">
+          <div class="col-md-2">
+              <label>do you have chaildren</label>
+              <input type="checkbox" formControlName="isChild" class="" [ngClass]="{ 'is-invalid': submitted && f.isChild.errors }" />
+            </div>
+            <div class="col-md-2">
+              <label>child Name</label>
+                <input type="text" formControlName="childName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.childName.errors }" />
+                <div *ngIf="submitted && f.childName.errors" class="invalid-feedback">
+                <div *ngIf="f.childName.errors.required">child name is required</div> 
+              </div>
+            </div>
+      </div>
+       
+
+
+
+
+    <mat-card formArrayName="units">
+        <mat-card-title>Units</mat-card-title>
+        <mat-divider></mat-divider>
+        <div *ngFor="let unit of registerForm.controls.units.controls; let i=index">
+          <mat-divider *ngIf="registerForm.controls.units.controls.length > 1 && i > 0" ></mat-divider><br>
+           <div [formGroupName]="i">
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="3.5%" fxLayoutAlign="center">
+              <mat-form-field  fxFlex="30%"> 
+                <input matInput placeholder="Unit name" formControlName="unitName" required>  
+                    <mat-error *ngIf="unit.controls.unitName.invalid">
+                        Unit name is required.        
+                    </mat-error>            
+              </mat-form-field>
+              <mat-form-field  fxFlex="10%" fxFlex.xs="20"> 
+                <input matInput placeholder="Quantity" type="number" formControlName="qty" required>
+               
+              </mat-form-field>
+              <mat-form-field  fxFlex="20%"  fxFlex.xs="grow"> 
+                <input matInput placeholder="Unit price" type="number" formControlName="unitPrice" required>
+               
+              </mat-form-field>
+              <div fxLayout.xs="row">
+              <mat-form-field  > 
+                <input matInput placeholder="Total sum" formControlName="unitTotalPrice">
+             
+              </mat-form-field>
+
+            
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <button type="button" class="btn btn-warning" mat-raised-button (click)="addUnit()">
+            Add new unit
+          </button>
+        </mat-card-actions>
+      </mat-card> <!-- End form units array -->    
+      <br>
+
+
+
+
+
+
+
+
+
+        <div class="form-group form-check">
+              <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+              <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+              <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+          </div>
+          <div class="text-center">
+              <button class="btn btn-primary mr-1">Register</button>
+              <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+          </div>
+        </form>
+      <div></div>
+  </div>
+</div>
+

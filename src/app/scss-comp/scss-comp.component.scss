@@ -1,0 +1,32 @@
+$base-color: #c6538c;
+$heighth2:500px;
+$widthh2:100%;
+$colorh2:rgb(146, 100, 45);
+$colorH1:aqua;
+$paddingh1:15px;
+$marginValue:25px;
+$bgcolor: lightblue;
+h1{
+    border: 1px solid $base-color;
+    background-color:$colorH1;
+    padding:$paddingh1;
+    margin-top:$marginValue
+
+}
+
+h2,h3{
+    border: 3px solid $base-color;
+    height: $heighth2;
+    width:$widthh2;
+    background-color:$colorh2; 
+    padding:$paddingh1;
+    margin: $marginValue;
+}
+h4{
+ $bgcolor:red !global ;
+ background-color: $bgcolor ;   
+
+}
+.row{
+    background-color: $bgcolor;
+}

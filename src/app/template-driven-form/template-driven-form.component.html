@@ -1,0 +1,29 @@
+<h1>product add </h1>
+<h2>Template Driven Form.</h2>
+
+<form (ngSubmit)="Onsubmit(productForm,product)" #productForm="ngForm" novalidate>
+ <div class="row">
+   <label class="col-md-4 text-right">Product Id</label>
+   <input type="text" [(ngModel)]="product.Id" placeholder="Product Id " class="form-control col-md-6"[ngModelOptions]="{standalone: true}">
+ </div> 
+ <br>
+ <div class="row">
+    <label class="col-md-4 text-right">Product Name</label>
+    <input type="text" [(ngModel)]="product.Name" placeholder="Product Name" class="form-control col-md-6"[ngModelOptions]="{standalone: true}">
+  </div> 
+  <br>
+  <div class="row">
+      <label class="col-md-4 text-right">Product price</label>
+      <input type="text" [(ngModel)]="product.price" placeholder="Product price" class="form-control col-md-6" [ngModelOptions]="{standalone: true}">
+  </div> 
+  <br>
+  <button class="btn btn-primary">Submit</button>
+ 
+
+</form>
+{{product.Id}}--{{product.Name}}--{{product.price}}
+
+<h2 *ngFor="let pd of productData">
+
+{{pd.Id}}--{{pd.Name}}--{{pd.price}}
+</h2>
